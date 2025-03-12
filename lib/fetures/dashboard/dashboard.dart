@@ -50,62 +50,66 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Widget buildAdminMenu() {
-    return Column(
-      children: [
-        ListTile(
-          leading: Icon(Icons.person_add),
-          title: Text('Add Teacher'),
-          onTap: () => GoRouter.of(context).go(Routerconstaints.addteacher),
-        ),
-        ListTile(
-          leading: Icon(Icons.group),
-          title: Text('All Teachers'),
-          onTap: () => GoRouter.of(context).go(Routerconstaints.manageteachers),
-        ),
-        ListTile(
-          leading: Icon(Icons.group),
-          title: Text('All Students'),
-          onTap: () => GoRouter.of(context).go( Routerconstaints.removestudent),
-        ),
-        ListTile(
-          leading: Icon(Icons.person_remove),
-          title: Text('remove students'),
-          onTap: () => GoRouter.of(context).go(Routerconstaints.removestudent),
-        ),
-         ListTile(
-          leading: Icon(Icons.person_remove),
-          title: Text('remove teachers'),
-          onTap: () => GoRouter.of(context).go(Routerconstaints.manageteachers),
-        ),
-        ListTile(
-          leading: Icon(Icons.person_add_alt),
-          title: Text('Add Student'),
-          onTap: () => GoRouter.of(context).go(Routerconstaints.addstudent),
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          ListTile(
+            leading: Icon(Icons.person_add),
+            title: Text('Add Teacher'),
+            onTap: () => GoRouter.of(context).go(Routerconstaints.addteacher),
+          ),
+          ListTile(
+            leading: Icon(Icons.group),
+            title: Text('All Teachers'),
+            onTap: () => GoRouter.of(context).go(Routerconstaints.manageteachers),
+          ),
+          ListTile(
+            leading: Icon(Icons.group),
+            title: Text('All Students'),
+            onTap: () => GoRouter.of(context).go( Routerconstaints.removestudent),
+          ),
+          ListTile(
+            leading: Icon(Icons.person_remove),
+            title: Text('remove students'),
+            onTap: () => GoRouter.of(context).go(Routerconstaints.removestudent),
+          ),
+           ListTile(
+            leading: Icon(Icons.person_remove),
+            title: Text('remove teachers'),
+            onTap: () => GoRouter.of(context).go(Routerconstaints.manageteachers),
+          ),
+          ListTile(
+            leading: Icon(Icons.person_add_alt),
+            title: Text('Add Student'),
+            onTap: () => GoRouter.of(context).go(Routerconstaints.addstudent),
+          ),
+        ],
+      ),
     );
   }
 
   Widget buildTeacherMenu() {
-    return Column(
-      children: [
-        ListTile(
-          leading: Icon(Icons.group),
-          title: Text('All Students'),
-          onTap: () => GoRouter.of(context).go(Routerconstaints.removestudent),
-        ),
-        ListTile(
-          leading: Icon(Icons.person_add_alt),
-          title: Text('Add Students'),
-          onTap: () => GoRouter.of(context).go(Routerconstaints.removestudent),
-        ),
-        ListTile(
-          leading: Icon(Icons.person_remove),
-          title: Text('remove Students'),
-          onTap: () => GoRouter.of(context).go(Routerconstaints.removestudent),
-        ),
-
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          ListTile(
+            leading: Icon(Icons.group),
+            title: Text('All Students'),
+            onTap: () => GoRouter.of(context).go(Routerconstaints.removestudent),
+          ),
+          ListTile(
+            leading: Icon(Icons.person_add_alt),
+            title: Text('Add Students'),
+            onTap: () => GoRouter.of(context).go(Routerconstaints.removestudent),
+          ),
+          ListTile(
+            leading: Icon(Icons.person_remove),
+            title: Text('remove Students'),
+            onTap: () => GoRouter.of(context).go(Routerconstaints.removestudent),
+          ),
+      
+        ],
+      ),
     );
   }
  Widget buildStudentMenu() {

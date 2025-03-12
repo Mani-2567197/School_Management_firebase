@@ -74,78 +74,80 @@ class _EditstudentState extends State<Editstudent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Edit Student')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextField(
-                    controller: nameController,
-                    decoration: const InputDecoration(labelText: 'Name', border: OutlineInputBorder()),
-                  ),
-                  const SizedBox(height: 10),
-                  TextField(
-                    controller: ageController,
-                    decoration: const InputDecoration(labelText: 'Age', border: OutlineInputBorder()),
-                  ),
-                  const SizedBox(height: 10),
-                  TextField(
-                    controller: emailController,
-                    decoration: const InputDecoration(labelText: 'Email', border: OutlineInputBorder()),
-                  ),
-                  const SizedBox(height: 10),
-                  TextField(
-                    controller: parentMobileController,
-                    decoration: const InputDecoration(labelText: 'Parent Mobile', border: OutlineInputBorder()),
-                  ),
-                  const SizedBox(height: 10),
-                  TextField(
-                    controller: studentClassController,
-                    decoration: const InputDecoration(labelText: 'Class', border: OutlineInputBorder()),
-                  ),
-                  const SizedBox(height: 10),
-                  DropdownButtonFormField<String>(
-                    value: selectedCity,
-                    decoration: const InputDecoration(
-                      labelText: 'Select City',
-                      border: OutlineInputBorder(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Center(
+            child: Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextField(
+                      controller: nameController,
+                      decoration: const InputDecoration(labelText: 'Name', border: OutlineInputBorder()),
                     ),
-                    items: cities.map((city) {
-                      return DropdownMenuItem(value: city, child: Text(city));
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        selectedCity = value;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: _editStudent,
-                      style: ElevatedButton.styleFrom(
-                     backgroundColor: Colors.yellow, 
-                     foregroundColor: Colors.black, 
-                      padding: const EdgeInsets.symmetric(vertical: 14), 
-                      shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                    const SizedBox(height: 10),
+                    TextField(
+                      controller: ageController,
+                      decoration: const InputDecoration(labelText: 'Age', border: OutlineInputBorder()),
                     ),
-    ),
-    child: const Text(
-      'Save Changes',
-      style: TextStyle(fontWeight: FontWeight.bold),
-    ),
-                      
+                    const SizedBox(height: 10),
+                    TextField(
+                      controller: emailController,
+                      decoration: const InputDecoration(labelText: 'Email', border: OutlineInputBorder()),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 10),
+                    TextField(
+                      controller: parentMobileController,
+                      decoration: const InputDecoration(labelText: 'Parent Mobile', border: OutlineInputBorder()),
+                    ),
+                    const SizedBox(height: 10),
+                    TextField(
+                      controller: studentClassController,
+                      decoration: const InputDecoration(labelText: 'Class', border: OutlineInputBorder()),
+                    ),
+                    const SizedBox(height: 10),
+                    DropdownButtonFormField<String>(
+                      value: selectedCity,
+                      decoration: const InputDecoration(
+                        labelText: 'Select City',
+                        border: OutlineInputBorder(),
+                      ),
+                      items: cities.map((city) {
+                        return DropdownMenuItem(value: city, child: Text(city));
+                      }).toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          selectedCity = value;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: _editStudent,
+                        style: ElevatedButton.styleFrom(
+                       backgroundColor: Colors.yellow, 
+                       foregroundColor: Colors.black, 
+                        padding: const EdgeInsets.symmetric(vertical: 14), 
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+            ),
+            child: const Text(
+        'Save Changes',
+        style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+                        
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

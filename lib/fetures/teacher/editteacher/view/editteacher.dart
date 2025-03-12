@@ -37,37 +37,39 @@ class _EditteacherState extends State<Editteacher> {
     final teacherViewModel = Provider.of<TeacherViewModel>(context);
     return Scaffold(
       appBar: AppBar(title: const Text('Edit Teacher')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Name'),
-            ),
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
-            ),
-            TextField(
-              controller: _subjectController,
-              decoration: const InputDecoration(labelText: 'Subject'),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () async {
-                final updatedTeacher = Teacher(
-                  id: widget.teacher.id,
-                  name: _nameController.text,
-                  email: _emailController.text,
-                  subject: _subjectController.text,
-                );
-                await teacherViewModel.updateTeacher(updatedTeacher);
-                Navigator.pop(context);
-              },
-              child: const Text('Update Teacher'),
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextField(
+                controller: _nameController,
+                decoration: const InputDecoration(labelText: 'Name'),
+              ),
+              TextField(
+                controller: _emailController,
+                decoration: const InputDecoration(labelText: 'Email'),
+              ),
+              TextField(
+                controller: _subjectController,
+                decoration: const InputDecoration(labelText: 'Subject'),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () async {
+                  final updatedTeacher = Teacher(
+                    id: widget.teacher.id,
+                    name: _nameController.text,
+                    email: _emailController.text,
+                    subject: _subjectController.text,
+                  );
+                  await teacherViewModel.updateTeacher(updatedTeacher);
+                  Navigator.pop(context);
+                },
+                child: const Text('Update Teacher'),
+              ),
+            ],
+          ),
         ),
       ),
     );
