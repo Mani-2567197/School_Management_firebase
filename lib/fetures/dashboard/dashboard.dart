@@ -56,32 +56,32 @@ class _DashboardState extends State<Dashboard> {
           ListTile(
             leading: Icon(Icons.person_add),
             title: Text('Add Teacher'),
-            onTap: () => GoRouter.of(context).go(Routerconstaints.addteacher),
+            onTap: () => GoRouter.of(context).push(Routerconstaints.addteacher),
           ),
           ListTile(
             leading: Icon(Icons.group),
             title: Text('All Teachers'),
-            onTap: () => GoRouter.of(context).go(Routerconstaints.manageteachers),
+            onTap: () => GoRouter.of(context).push(Routerconstaints.manageteachers),
           ),
           ListTile(
             leading: Icon(Icons.group),
             title: Text('All Students'),
-            onTap: () => GoRouter.of(context).go( Routerconstaints.removestudent),
+            onTap: () => GoRouter.of(context).push( Routerconstaints.removestudent),
           ),
           ListTile(
             leading: Icon(Icons.person_remove),
             title: Text('remove students'),
-            onTap: () => GoRouter.of(context).go(Routerconstaints.removestudent),
+            onTap: () => GoRouter.of(context).push(Routerconstaints.removestudent),
           ),
            ListTile(
             leading: Icon(Icons.person_remove),
             title: Text('remove teachers'),
-            onTap: () => GoRouter.of(context).go(Routerconstaints.manageteachers),
+            onTap: () => GoRouter.of(context).push(Routerconstaints.manageteachers),
           ),
           ListTile(
             leading: Icon(Icons.person_add_alt),
             title: Text('Add Student'),
-            onTap: () => GoRouter.of(context).go(Routerconstaints.addstudent),
+            onTap: () => GoRouter.of(context).push(Routerconstaints.addstudent),
           ),
         ],
       ),
@@ -95,17 +95,17 @@ class _DashboardState extends State<Dashboard> {
           ListTile(
             leading: Icon(Icons.group),
             title: Text('All Students'),
-            onTap: () => GoRouter.of(context).go(Routerconstaints.removestudent),
+            onTap: () => GoRouter.of(context).push(Routerconstaints.removestudent),
           ),
           ListTile(
             leading: Icon(Icons.person_add_alt),
             title: Text('Add Students'),
-            onTap: () => GoRouter.of(context).go(Routerconstaints.removestudent),
+            onTap: () => GoRouter.of(context).push(Routerconstaints.removestudent),
           ),
           ListTile(
             leading: Icon(Icons.person_remove),
             title: Text('remove Students'),
-            onTap: () => GoRouter.of(context).go(Routerconstaints.removestudent),
+            onTap: () => GoRouter.of(context).push(Routerconstaints.removestudent),
           ),
       
         ],
@@ -118,7 +118,7 @@ class _DashboardState extends State<Dashboard> {
         ListTile(
           leading: Icon(Icons.person),
           title: Text('View Profile'),
-          onTap: () => GoRouter.of(context).go(Routerconstaints.sboard),
+          onTap: () => GoRouter.of(context).push(Routerconstaints.sboard),
         ),
         ListTile(
           leading: Icon(Icons.edit),
@@ -134,7 +134,7 @@ class _DashboardState extends State<Dashboard> {
         studentClass: userData!['studentClass'] ?? '',
         city: userData!['city'] ?? '',
       );
-      GoRouter.of(context).go(Routerconstaints.editstudent, extra: student);
+      GoRouter.of(context).push(Routerconstaints.editstudent, extra: student);
     }
   },
         ),
@@ -192,7 +192,7 @@ class _DashboardState extends State<Dashboard> {
             icon: Icon(Icons.logout),
             onPressed: () {
               FirebaseAuth.instance.signOut();
-              GoRouter.of(context).go('/login');
+              GoRouter.of(context).go(Routerconstaints.login);
             },
           ),
         ],

@@ -1,16 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:school_management_system/fetures/auth/register/model/registrationmodel.dart';
 
 class RegistrationRepository {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  Future<User?> signUp(RegistrationModel registrationModel) async {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+ Future<UserCredential> registerUser(String email, String password, String role) async {
     try {
       UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-        email: registrationModel.email,
-        password: registrationModel.password,
+        email: email,
+        password: password,
       );
-      return userCredential.user;
+      await _firestore.collection('users').doc(userCredential.user?.uid).set({
+        'email': email,
+        'role': role,
+      });
+
+      return userCredential;
     } catch (e) {
       throw Exception(e.toString());
     }
