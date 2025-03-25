@@ -7,7 +7,7 @@ import 'package:school_management_system/fetures/teacher/addteacher/viewmodel/te
 import 'package:school_management_system/firebase_options.dart';
 import 'package:school_management_system/routes/routes.dart';
 import 'package:school_management_system/services/authservices.dart';
-
+import 'package:school_management_system/utils/themeprovider.dart';
 
 void main() async {
    WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +20,15 @@ void main() async {
     print('Error initializing Firebase: $e');
   }
 
-  runApp(const MyApp());
+  runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AuthService()),
+        ChangeNotifierProvider(create: (context) => Addstudentviewmodel()),
+        ChangeNotifierProvider(create: (context) => TeacherViewModel()),
+        ChangeNotifierProvider(create: (context)=> RegistrationViewModel()),
+        ChangeNotifierProvider(create: (_)=> ThemeProvider())
+      ],
+      child: const MyApp(),),);
 }
 
 class MyApp extends StatelessWidget {
@@ -29,19 +37,12 @@ class MyApp extends StatelessWidget {
  
   @override
   Widget build(BuildContext context) {
-    return  MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => AuthService()),
-        ChangeNotifierProvider(create: (context) => Addstudentviewmodel()),
-        ChangeNotifierProvider(create: (context) => TeacherViewModel()),
-        ChangeNotifierProvider(create: (context)=> RegistrationViewModel())
-      ],
-      child: MaterialApp.router(
+     final themeProvider  = Provider.of<ThemeProvider>(context);
+    return MaterialApp.router(
         debugShowCheckedModeBanner: false,
         title: 'Play School Management',
-      //theme: AppTheme.lightTheme,
+        theme: themeProvider.themeData,
         routerConfig: AppRouter.router,
-      ),
     );
   }
 }

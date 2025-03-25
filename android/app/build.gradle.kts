@@ -11,7 +11,7 @@ plugins {
 android {
     
     namespace = "com.example.school_management_system"
-    compileSdk = 33
+    compileSdk = 34
     ndkVersion = "27.0.12077973"
 
     compileOptions {

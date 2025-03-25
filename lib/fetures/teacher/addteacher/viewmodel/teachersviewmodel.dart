@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:school_management_system/fetures/teacher/addteacher/model/teacher.dart';
 import 'package:school_management_system/fetures/teacher/addteacher/repository/teacherrepository.dart';
 import 'package:school_management_system/routes/routerconstaints.dart';
+import 'package:school_management_system/utils/colorconstaints.dart';
 
 class TeacherViewModel extends ChangeNotifier {
   final TeacherRepository _repository = TeacherRepository();
@@ -36,7 +37,7 @@ class TeacherViewModel extends ChangeNotifier {
       await _repository.addTeacher(newTeacher);
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Teacher added successfully'),
-        backgroundColor: Color.fromARGB(255, 130, 155, 131),
+        backgroundColor: Colorconstaints.successColor
       ));
       GoRouter.of(context).go(Routerconstaints.dashboard);
       notifyListeners();
@@ -44,7 +45,7 @@ class TeacherViewModel extends ChangeNotifier {
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Failed to add teacher'),
-        backgroundColor: Color.fromARGB(255, 243, 180, 176),
+        backgroundColor: Colorconstaints.errorColor
       ));
     }
 
@@ -72,6 +73,7 @@ class TeacherViewModel extends ChangeNotifier {
   Future<void> deleteTeacher(String teacherId,String userRole) async {
     await _repository.deleteTeacher(teacherId,userRole);
     _teachers.removeWhere((teacher) => teacher.id == teacherId);
+    fetchAllTeachers(userRole);
     notifyListeners();
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:school_management_system/fetures/teacher/addteacher/viewmodel/teachersviewmodel.dart';
+import 'package:school_management_system/utils/colorconstaints.dart';
 
 class Addteacher extends StatefulWidget {
   const Addteacher({super.key});
@@ -22,9 +23,6 @@ class _AddteacherState extends State<Addteacher> {
           child: Center(
             child: Card(
               elevation: 5,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Form(
@@ -32,11 +30,6 @@ class _AddteacherState extends State<Addteacher> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
-                        "Add Teacher Details",
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 15),
                       TextFormField(
                         controller: teacherViewModel.idController,
                         decoration: const InputDecoration(
@@ -75,10 +68,7 @@ class _AddteacherState extends State<Addteacher> {
                       const SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: () => teacherViewModel.addTeacher(context),
-                        style: ElevatedButton.styleFrom(backgroundColor: Colors.greenAccent, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
-                        child: teacherViewModel.isLoading
-                            ? const CircularProgressIndicator(color: Colors.white)
-                            : const Text('Add Teacher',),
+                        child: teacherViewModel.isLoading ? CircularProgressIndicator(color: Colorconstaints.backgroundColor) : Text('Add Teacher'),
                       ),
                     ],
                   ),

@@ -35,7 +35,7 @@ class StudentRepository {
     await _firestore.collection('students').doc(student.id).update(student.toJson());
   }
   Future<Student?> fetchStudentData(String userId) async {
-    final doc = await _firestore.collection('students').doc(userId).get();
+    final doc = await _firestore.collection('users').doc(userId).get();
     if (doc.exists) {
       return Student.fromJson(doc.data()!);
     }

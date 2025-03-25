@@ -45,8 +45,12 @@ class _EditstudentState extends State<Editstudent> {
     final viewModel = Addstudentviewmodel();
     final fetchedCities = await viewModel.getCities();
     setState(() {
-      cities = fetchedCities;
+      cities = fetchedCities.toSet().toList();
+      if (!cities.contains(selectedCity)) {
+      selectedCity = null; 
+    }
     });
+    
   }
 
   Future<void> _editStudent() async {
@@ -112,7 +116,7 @@ class _EditstudentState extends State<Editstudent> {
                     ),
                     const SizedBox(height: 10),
                     DropdownButtonFormField<String>(
-                      value: selectedCity,
+                      value: cities.contains(selectedCity) ? selectedCity : null,
                       decoration: const InputDecoration(
                         labelText: 'Select City',
                         border: OutlineInputBorder(),
@@ -121,6 +125,7 @@ class _EditstudentState extends State<Editstudent> {
                         return DropdownMenuItem(value: city, child: Text(city));
                       }).toList(),
                       onChanged: (value) {
+                       // print("City changed to: $value");
                         setState(() {
                           selectedCity = value;
                         });
@@ -132,8 +137,6 @@ class _EditstudentState extends State<Editstudent> {
                       child: ElevatedButton(
                         onPressed: _editStudent,
                         style: ElevatedButton.styleFrom(
-                       backgroundColor: Colors.yellow, 
-                       foregroundColor: Colors.black, 
                         padding: const EdgeInsets.symmetric(vertical: 14), 
                         shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),

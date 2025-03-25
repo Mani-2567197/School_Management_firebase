@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:school_management_system/fetures/student/addstudent/model/student.dart';
 import 'package:school_management_system/routes/routerconstaints.dart';
+import 'package:school_management_system/utils/themeprovider.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({ super.key, required String role });
@@ -121,7 +123,7 @@ class _DashboardState extends State<Dashboard> {
           onTap: () => GoRouter.of(context).push(Routerconstaints.sboard),
         ),
         ListTile(
-          leading: Icon(Icons.edit),
+          leading: Icon(Icons.edit,color: Colors.amber),
           title: Text('Edit Profile'),
           onTap: ()  {
     if (userData != null) {
@@ -156,10 +158,9 @@ class _DashboardState extends State<Dashboard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 DrawerHeader(
-                 
                   child: Text(
                     userData?['role'] ?? 'User',
-                    style: TextStyle(color: const Color.fromARGB(255, 51, 70, 92), fontSize: 24),
+                    style: TextStyle(color: const Color.fromARGB(255, 165, 203, 247), fontSize: 24),
                   ),
                 ),
                 if (userData?['role'] == 'Admin') buildAdminMenu(),
@@ -172,7 +173,7 @@ class _DashboardState extends State<Dashboard> {
           child: Center(
             child: Text(
               'Welcome, ' + (userData?['name'] ?? ''),
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style:Theme.of(context).textTheme.titleLarge,
             ),
           ),
         ),
@@ -182,14 +183,23 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Dashboard'),
-        backgroundColor: Colors.deepPurple,
         leading: buildMenuButton(),
         actions: [
           IconButton(
-            icon: Icon(Icons.logout),
+            icon: Icon(
+              themeProvider.isDarkMode ? Icons.light_mode : Icons.dark_mode,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              themeProvider.toggleTheme();
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.logout,color: Colors.grey,),
             onPressed: () {
               FirebaseAuth.instance.signOut();
               GoRouter.of(context).go(Routerconstaints.login);

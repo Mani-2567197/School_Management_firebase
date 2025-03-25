@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:school_management_system/fetures/student/addstudent/viewmodel/addstudentviewmodel.dart';
+import 'package:school_management_system/utils/colorconstaints.dart';
 
 class Addstudent extends StatefulWidget {
   const Addstudent({ super.key });
@@ -15,13 +16,13 @@ class _AddstudentState extends State<Addstudent> {
     final viewModel = Provider.of<Addstudentviewmodel>(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text('Add Student'), backgroundColor: Colors.deepPurple),
+      appBar: AppBar(
+        title: Text('Add Student')),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Card(
             elevation: 5,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Form(
@@ -47,8 +48,7 @@ class _AddstudentState extends State<Addstudent> {
                     SizedBox(height: 16),
                     ElevatedButton(
                       onPressed: viewModel.isLoading ? null : () => viewModel.addStudent(context),
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.greenAccent, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
-                      child: viewModel.isLoading ? CircularProgressIndicator(color: Colors.white) : Text('Add Student'),
+                      child: viewModel.isLoading ? CircularProgressIndicator(color: Colorconstaints.backgroundColor) : Text('Add Student'),
                     ),
                   ],
                 ),

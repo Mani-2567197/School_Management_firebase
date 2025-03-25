@@ -5,6 +5,7 @@ import 'package:school_management_system/fetures/student/addstudent/model/studen
 import 'package:school_management_system/fetures/student/addstudent/repository/studentrepository.dart';
 import 'package:school_management_system/routes/routerconstaints.dart';
 import 'package:school_management_system/services/cities.dart';
+import 'package:school_management_system/utils/colorconstaints.dart';
 
 class Addstudentviewmodel extends ChangeNotifier {
   final StudentRepository _repository = StudentRepository();
@@ -54,7 +55,7 @@ class Addstudentviewmodel extends ChangeNotifier {
 
     await _repository.addStudent(student);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Student added successfully'),
-    backgroundColor: const Color.fromARGB(255, 194, 241, 218),));
+    backgroundColor: Colorconstaints.successColor,));
     GoRouter.of(context).go(Routerconstaints.dashboard);
     
     isLoading = false;

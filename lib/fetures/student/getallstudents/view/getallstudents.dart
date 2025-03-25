@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:school_management_system/fetures/student/addstudent/model/student.dart';
 import 'package:school_management_system/fetures/student/addstudent/viewmodel/addstudentviewmodel.dart';
 import 'package:school_management_system/fetures/student/editstudent/view/editstudent.dart';
+import 'package:school_management_system/utils/colorconstaints.dart';
 
 class GetAllStudents extends StatefulWidget {
   const GetAllStudents({super.key});
@@ -81,7 +82,7 @@ class _GetAllStudentsState extends State<GetAllStudents> {
                 );
               }
             },
-            child: const Text("Delete", style: TextStyle(color: Colors.red)),
+            child: const Text("Delete", style: TextStyle(color:Colorconstaints.errorColor)),
           ),
         ],
       ),
@@ -105,36 +106,36 @@ class _GetAllStudentsState extends State<GetAllStudents> {
                       scrollDirection: Axis.horizontal,
                       child: DataTable(
                         columnSpacing: 30, 
-                        columns: const [
-                          DataColumn(label: Text('Id')),
-                          DataColumn(label: Text('Name')),
-                          DataColumn(label: Text('Age')),
-                          DataColumn(label: Text('Class')),
-                          DataColumn(label: Text('City')),
-                          DataColumn(label: Text('Email')),
-                          DataColumn(label: Text('Parent Mobile')),
-                          DataColumn(label: Text('Edit')),
-                          DataColumn(label: Text('Delete'))
+                        columns: [
+                          DataColumn(label: Text('Id',style:Theme.of(context).textTheme.titleLarge)),
+                          DataColumn(label: Text('Name',style:Theme.of(context).textTheme.titleLarge)),
+                          DataColumn(label: Text('Age',style:Theme.of(context).textTheme.titleLarge)),
+                          DataColumn(label: Text('Class',style:Theme.of(context).textTheme.titleLarge)),
+                          DataColumn(label: Text('City',style:Theme.of(context).textTheme.titleLarge)),
+                          DataColumn(label: Text('Email',style:Theme.of(context).textTheme.titleLarge)),
+                          DataColumn(label: Text('Parent Mobile',style:Theme.of(context).textTheme.titleLarge)),
+                          DataColumn(label: Text('Edit',style:Theme.of(context).textTheme.titleLarge)),
+                          DataColumn(label: Text('Delete',style:Theme.of(context).textTheme.titleLarge))
                         ],
                         rows: studentViewModel.students.map((student) {
                           return DataRow(
                             cells: [
-                              DataCell(Text(student.id)),
-                              DataCell(Text(student.name)),
-                              DataCell(Text(student.age)),
-                              DataCell(Text(student.studentClass)),
-                              DataCell(Text(student.city)),
-                              DataCell(Text(student.email)),
-                              DataCell(Text(student.parentMobile)),
+                              DataCell(Text(student.id,style:Theme.of(context).textTheme.bodyLarge)),
+                              DataCell(Text(student.name,style:Theme.of(context).textTheme.bodyLarge)),
+                              DataCell(Text(student.age,style:Theme.of(context).textTheme.bodyLarge)),
+                              DataCell(Text(student.studentClass,style:Theme.of(context).textTheme.bodyLarge)),
+                              DataCell(Text(student.city,style:Theme.of(context).textTheme.bodyLarge)),
+                              DataCell(Text(student.email,style:Theme.of(context).textTheme.bodyLarge)),
+                              DataCell(Text(student.parentMobile,style:Theme.of(context).textTheme.bodyLarge)),
                               DataCell(
                                 IconButton(
-                                  icon: const Icon(Icons.edit, color: Colors.amber),
+                                  icon: const Icon(Icons.edit, color: Colorconstaints.secondaryColor),
                                   onPressed: () => _editStudent(context, student),
                                 ),
                               ),
                               DataCell(
                                 IconButton(
-                                  icon: const Icon(Icons.delete, color: Colors.red),
+                                  icon: const Icon(Icons.delete, color: Colorconstaints.errorColor),
                                   onPressed: () => _confirmDelete(context, student.id),
                                 ),
                               ),

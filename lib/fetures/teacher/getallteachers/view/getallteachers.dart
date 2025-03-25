@@ -2,7 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:school_management_system/fetures/teacher/addteacher/model/teacher.dart';
 import 'package:school_management_system/fetures/teacher/addteacher/viewmodel/teachersviewmodel.dart';
+import 'package:school_management_system/fetures/teacher/editteacher/view/editteacher.dart';
+import 'package:school_management_system/utils/colorconstaints.dart';
 
 class Getallteachers extends StatefulWidget {
   const Getallteachers({ super.key });
@@ -42,10 +45,24 @@ class _GetallteachersState extends State<Getallteachers> {
           Provider.of<TeacherViewModel>(context, listen: false).deleteTeacher(teacherId, 'Admin');
           Navigator.pop(context);
         },
-        child: const Text("Delete",style: TextStyle(color: Colors.red),))
+        child: const Text("Delete",style: TextStyle(color: Colorconstaints.errorColor),))
       ],
     ),);
   }
+  void _editTeacher(BuildContext context, Teacher teacher) {
+  if (userRole == 'Admin') {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Editteacher( teacher: teacher,),
+      ),
+    );
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Only Admin can edit Teachers data.")),
+    );
+  }
+}
   @override
   Widget build(BuildContext context) {
     final teacherViewModel = Provider.of<TeacherViewModel>(context);
@@ -65,22 +82,29 @@ class _GetallteachersState extends State<Getallteachers> {
                           padding: const EdgeInsets.all(16.0),
                           child: DataTable(
                             columnSpacing: 30, 
-                            columns: const [
-                              DataColumn(label: Text('Tecaher ID')),
-                              DataColumn(label: Text('Techer Name')),
-                              DataColumn(label: Text('Email')),
-                              DataColumn(label: Text('Subject')),
-                              DataColumn(label: Text('Actions')),
+                            columns: [
+                              DataColumn(label: Text('Tecaher ID',style:Theme.of(context).textTheme.titleLarge)),
+                              DataColumn(label: Text('Techer Name',style:Theme.of(context).textTheme.titleLarge)),
+                              DataColumn(label: Text('Email',style:Theme.of(context).textTheme.titleLarge)),
+                              DataColumn(label: Text('Subject',style:Theme.of(context).textTheme.titleLarge)),
+                              DataColumn(label: Text('Edit',style:Theme.of(context).textTheme.titleLarge)),
+                              DataColumn(label: Text('Delete',style:Theme.of(context).textTheme.titleLarge))
                             ],
                             rows: teacherViewModel.teachers.map(
                                   (teacher) => DataRow(cells: [
-                                    DataCell(Text(teacher.id)),
-                                    DataCell(Text(teacher.name)),
-                                    DataCell(Text(teacher.email)),
-                                    DataCell(Text(teacher.subject)),
+                                    DataCell(Text(teacher.id,style:Theme.of(context).textTheme.bodyLarge)),
+                                    DataCell(Text(teacher.name,style:Theme.of(context).textTheme.bodyLarge)),
+                                    DataCell(Text(teacher.email,style:Theme.of(context).textTheme.bodyLarge)),
+                                    DataCell(Text(teacher.subject,style:Theme.of(context).textTheme.bodyLarge)),
+                                    DataCell(
+                                IconButton(
+                                  icon: const Icon(Icons.edit, color: Colorconstaints.secondaryColor),
+                                  onPressed: () => _editTeacher(context, teacher),
+                                ),
+                              ),
                                     DataCell(
                                       IconButton(
-                                        icon: const Icon(Icons.delete, color: Colors.red),
+                                        icon: const Icon(Icons.delete, color: Colorconstaints.errorColor),
                                         onPressed: () =>
                                             _confirmDelete(context, teacher.id),
                                       ),
