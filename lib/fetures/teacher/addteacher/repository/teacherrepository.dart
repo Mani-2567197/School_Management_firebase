@@ -9,6 +9,7 @@ class TeacherRepository {
       await _firestore.collection('teachers').doc(teacher.id).set(teacher.toJson());
     } catch (e) {
       print("Error adding teacher: $e");
+      print(teacher.subject);
       throw Exception("Failed to add teacher");
     }
   }

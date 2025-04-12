@@ -57,13 +57,37 @@ class _AddteacherState extends State<Addteacher> {
                         validator: (value) => value!.isEmpty ? 'Enter email' : null,
                       ),
                       const SizedBox(height: 10),
-                      TextFormField(
-                        controller: teacherViewModel.subjectController,
-                        decoration: const InputDecoration(
-                          labelText: 'Subject',
-                          border: OutlineInputBorder(),
-                        ),
-                        validator: (value) => value!.isEmpty ? 'Enter subject' : null,
+                      DropdownButton<String>(
+                        value: teacherViewModel.seletedsubject,
+                        hint: Text('Select Subject'),
+                        isExpanded: true,
+                       
+                        items: teacherViewModel.subject.map((subject){
+                          return DropdownMenuItem<String>(value: subject,
+                          child:Text(subject),);
+                        }).toList(),
+                        onChanged: (value) => teacherViewModel.setselctedsubject(value),
+                       
+                      ),
+                      
+                      
+                      
+                      Text('Employeement type:'),
+                      Row(
+                        children: [
+                          Radio<String>(value: 'permanent',
+                          groupValue: teacherViewModel.employeementtype,
+                          onChanged: (String? value){
+                            teacherViewModel.employeementtype =value;
+                          },),
+                          Text('permanent'),
+                          Radio<String>(value: 'contract',
+                          groupValue: teacherViewModel.employeementtype,
+                          onChanged: (String? value){
+                            teacherViewModel.employeementtype =value;
+                          },),
+                          Text('contract'),
+                        ],
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(

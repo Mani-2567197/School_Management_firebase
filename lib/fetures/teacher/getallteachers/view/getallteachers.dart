@@ -87,6 +87,7 @@ class _GetallteachersState extends State<Getallteachers> {
                               DataColumn(label: Text('Techer Name',style:Theme.of(context).textTheme.titleLarge)),
                               DataColumn(label: Text('Email',style:Theme.of(context).textTheme.titleLarge)),
                               DataColumn(label: Text('Subject',style:Theme.of(context).textTheme.titleLarge)),
+                              DataColumn(label: Text('Employementtype',style:Theme.of(context).textTheme.titleLarge)),
                               DataColumn(label: Text('Edit',style:Theme.of(context).textTheme.titleLarge)),
                               DataColumn(label: Text('Delete',style:Theme.of(context).textTheme.titleLarge))
                             ],
@@ -96,6 +97,7 @@ class _GetallteachersState extends State<Getallteachers> {
                                     DataCell(Text(teacher.name,style:Theme.of(context).textTheme.bodyLarge)),
                                     DataCell(Text(teacher.email,style:Theme.of(context).textTheme.bodyLarge)),
                                     DataCell(Text(teacher.subject,style:Theme.of(context).textTheme.bodyLarge)),
+                                     DataCell(Text(teacher.employeementtype,style:Theme.of(context).textTheme.bodyLarge)),
                                     DataCell(
                                 IconButton(
                                   icon: const Icon(Icons.edit, color: Colorconstaints.secondaryColor),

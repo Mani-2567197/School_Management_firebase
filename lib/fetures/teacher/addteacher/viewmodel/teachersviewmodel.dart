@@ -10,16 +10,35 @@ class TeacherViewModel extends ChangeNotifier {
   final TeacherRepository _repository = TeacherRepository();
   List<Teacher> _teachers = [];
   Teacher? teacher;
+  String? seletedsubject;
+  String? employeementtype ='permanent';
+  List<String> subject =[
+    'Maths',
+    'Physics',
+    'Chemistry',
+    'History',
+    'Geography',
+    'Hindi'
+  ];
+
   List<Teacher> get teachers => _teachers;
   final formKey = GlobalKey<FormState>();
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final subjectController = TextEditingController();
-  final idController = TextEditingController(); 
+  final idController = TextEditingController();
+  final employetypeControlller =TextEditingController();
+
 
   bool isLoading = false;
-
+ TeacherViewModel(){
+  seletedsubject = subject.isEmpty? subject[0] :'Maths';
+ }
+void setselctedsubject(String? sub) {
+    seletedsubject = sub;
+    notifyListeners();
+  }
   Future<void> addTeacher(BuildContext context) async {
     if (!formKey.currentState!.validate()) return;
 
@@ -30,7 +49,8 @@ class TeacherViewModel extends ChangeNotifier {
       id: idController.text,
       name: nameController.text,
       email: emailController.text,
-      subject: subjectController.text,
+      subject: seletedsubject!,
+      employeementtype: employeementtype!,
     );
 
     try {
@@ -61,6 +81,7 @@ class TeacherViewModel extends ChangeNotifier {
     }
     catch(e){
       print("Error :$e");
+     // print(s);
     }
     notifyListeners();
   }

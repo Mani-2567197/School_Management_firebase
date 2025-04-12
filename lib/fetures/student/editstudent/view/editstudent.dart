@@ -25,8 +25,12 @@ class _EditstudentState extends State<Editstudent> {
     nameController = TextEditingController(text: widget.student.name);
     ageController = TextEditingController(text: widget.student.age);
     emailController = TextEditingController(text: widget.student.email);
-    parentMobileController = TextEditingController(text: widget.student.parentMobile);
-    studentClassController = TextEditingController(text: widget.student.studentClass);
+    parentMobileController = TextEditingController(
+      text: widget.student.parentMobile,
+    );
+    studentClassController = TextEditingController(
+      text: widget.student.studentClass,
+    );
     selectedCity = widget.student.city;
     _fetchCities();
   }
@@ -47,10 +51,9 @@ class _EditstudentState extends State<Editstudent> {
     setState(() {
       cities = fetchedCities.toSet().toList();
       if (!cities.contains(selectedCity)) {
-      selectedCity = null; 
-    }
+        selectedCity = null;
+      }
     });
-    
   }
 
   Future<void> _editStudent() async {
@@ -66,11 +69,11 @@ class _EditstudentState extends State<Editstudent> {
 
     final viewModel = Addstudentviewmodel();
     await viewModel.editStudent(updatedStudent);
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text("Student details updated successfully")),
     );
-    
+
     Navigator.pop(context);
   }
 
@@ -84,7 +87,9 @@ class _EditstudentState extends State<Editstudent> {
           child: Center(
             child: Card(
               elevation: 4,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -92,40 +97,60 @@ class _EditstudentState extends State<Editstudent> {
                   children: [
                     TextField(
                       controller: nameController,
-                      decoration: const InputDecoration(labelText: 'Name', border: OutlineInputBorder()),
+                      decoration: const InputDecoration(
+                        labelText: 'Name',
+                        border: OutlineInputBorder(),
+                      ),
                     ),
                     const SizedBox(height: 10),
                     TextField(
                       controller: ageController,
-                      decoration: const InputDecoration(labelText: 'Age', border: OutlineInputBorder()),
+                      decoration: const InputDecoration(
+                        labelText: 'Age',
+                        border: OutlineInputBorder(),
+                      ),
                     ),
                     const SizedBox(height: 10),
                     TextField(
                       controller: emailController,
-                      decoration: const InputDecoration(labelText: 'Email', border: OutlineInputBorder()),
+                      decoration: const InputDecoration(
+                        labelText: 'Email',
+                        border: OutlineInputBorder(),
+                      ),
                     ),
                     const SizedBox(height: 10),
                     TextField(
                       controller: parentMobileController,
-                      decoration: const InputDecoration(labelText: 'Parent Mobile', border: OutlineInputBorder()),
+                      decoration: const InputDecoration(
+                        labelText: 'Parent Mobile',
+                        border: OutlineInputBorder(),
+                      ),
                     ),
                     const SizedBox(height: 10),
                     TextField(
                       controller: studentClassController,
-                      decoration: const InputDecoration(labelText: 'Class', border: OutlineInputBorder()),
+                      decoration: const InputDecoration(
+                        labelText: 'Class',
+                        border: OutlineInputBorder(),
+                      ),
                     ),
                     const SizedBox(height: 10),
                     DropdownButtonFormField<String>(
-                      value: cities.contains(selectedCity) ? selectedCity : null,
+                      value:
+                          cities.contains(selectedCity) ? selectedCity : null,
                       decoration: const InputDecoration(
                         labelText: 'Select City',
                         border: OutlineInputBorder(),
                       ),
-                      items: cities.map((city) {
-                        return DropdownMenuItem(value: city, child: Text(city));
-                      }).toList(),
+                      items:
+                          cities.map((city) {
+                            return DropdownMenuItem(
+                              value: city,
+                              child: Text(city),
+                            );
+                          }).toList(),
                       onChanged: (value) {
-                       // print("City changed to: $value");
+                        // print("City changed to: $value");
                         setState(() {
                           selectedCity = value;
                         });
@@ -137,16 +162,15 @@ class _EditstudentState extends State<Editstudent> {
                       child: ElevatedButton(
                         onPressed: _editStudent,
                         style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 14), 
-                        shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-            ),
-            child: const Text(
-        'Save Changes',
-        style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-                        
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: const Text(
+                          'Save Changes',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ],

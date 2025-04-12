@@ -3,12 +3,14 @@ class Teacher {
   final String name;
   final String email;
   final String subject;
+  final String employeementtype;
 
   Teacher({
     required this.id,
     required this.name,
     required this.email,
     required this.subject,
+    required this.employeementtype,
   });
 
   Map<String, dynamic> toJson() => {
@@ -16,6 +18,7 @@ class Teacher {
         'name': name,
         'email': email,
         'subject': subject,
+        'employeementtype':employeementtype,
       };
 
   factory Teacher.fromJson(Map<String, dynamic> json) {
@@ -24,6 +27,7 @@ class Teacher {
       name: json['name'],
       email: json['email'],
       subject: json['subject'],
+      employeementtype:json['employeementtype'],
     );
   }
 }

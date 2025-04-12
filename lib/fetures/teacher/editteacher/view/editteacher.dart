@@ -15,6 +15,7 @@ class _EditteacherState extends State<Editteacher> {
   late TextEditingController _nameController;
   late TextEditingController _emailController;
   late TextEditingController _subjectController;
+  late TextEditingController _employetypeControlller; 
 
   @override
   void initState() {
@@ -22,6 +23,8 @@ class _EditteacherState extends State<Editteacher> {
     _nameController = TextEditingController(text: widget.teacher.name);
     _emailController = TextEditingController(text: widget.teacher.email);
     _subjectController = TextEditingController(text: widget.teacher.subject);
+    _employetypeControlller = TextEditingController(text:widget.teacher.employeementtype);
+
   }
 
   @override
@@ -38,6 +41,8 @@ class _EditteacherState extends State<Editteacher> {
       name: _nameController.text,
       email: _emailController.text,
       subject: _subjectController.text,
+      employeementtype: _employetypeControlller.text,
+
     );
 
     Provider.of<TeacherViewModel>(context, listen: false)
@@ -56,6 +61,7 @@ class _EditteacherState extends State<Editteacher> {
 
   @override
   Widget build(BuildContext context) {
+     final teacherViewModel = Provider.of<TeacherViewModel>(context);
     return Scaffold(
       appBar: AppBar(title: const Text('Edit Teacher')),
       body: Padding(
@@ -91,15 +97,38 @@ class _EditteacherState extends State<Editteacher> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  TextField(
-                    controller: _subjectController,
-                    decoration: InputDecoration(
-                      labelText: 'Subject',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                  DropdownButton<String>(
+                        value: teacherViewModel.seletedsubject,
+                        hint: Text('Select Subject'),
+                        isExpanded: true,
+                       
+                        items: teacherViewModel.subject.map((subject){
+                          return DropdownMenuItem<String>(value: subject,
+                          child:Text(subject),);
+                        }).toList(),
+                        onChanged: (value) => teacherViewModel.setselctedsubject(value),
+                       
                       ),
-                    ),
-                  ),
+                      
+                      
+                      
+                      Text('Employeement type:'),
+                      Row(
+                        children: [
+                          Radio<String>(value: 'permanent',
+                          groupValue: teacherViewModel.employeementtype,
+                          onChanged: (String? value){
+                            teacherViewModel.employeementtype =value;
+                          },),
+                          Text('permanent'),
+                          Radio<String>(value: 'contract',
+                          groupValue: teacherViewModel.employeementtype,
+                          onChanged: (String? value){
+                            teacherViewModel.employeementtype =value;
+                          },),
+                          Text('contract'),
+                        ],
+                      ),
                   const SizedBox(height: 20),
                   SizedBox(
                     width: double.infinity,
